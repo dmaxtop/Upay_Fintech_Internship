@@ -39,7 +39,7 @@ class Account(models.Model):
         db_table = 'fin_account'
         constraints = [
             models.CheckConstraint(
-                check=Q(balance__gte=0), 
+                condition=Q(balance__gte=0),
                 name='balance_cannot_be_negative'
             )
         ]
