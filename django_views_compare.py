@@ -19,3 +19,22 @@ class AccountLowLevelView(View):
     def post(self, request, *args, **kwargs):
         return HttpResponse("Custom low-level POST response")
 
+
+# =====================================================================
+# 1. TemplateView
+# =====================================================================
+class AccountDashboardView(TemplateView):
+    """
+    WHEN TO CHOOSE:
+    When you just need to render a static HTML template, optionally 
+    injecting some basic context data. Excellent for landing pages, 
+    "About Us" pages, or static dashboards.
+    """
+    template_name = 'accounts/dashboard.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = "Account Dashboard"
+        return context
+
+
