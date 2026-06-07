@@ -69,3 +69,31 @@ class AccountCreateView(CreateView):
     template_name = 'accounts/account_form.html'
     success_url = reverse_lazy('account-list')
 
+# =====================================================================
+# 4. UpdateView
+# =====================================================================
+class AccountUpdateView(UpdateView):
+    """
+    WHEN TO CHOOSE:
+    When you need to update an existing database record via a form. 
+    It automatically fetches the specific object using a URL parameter 
+    (like `pk`), populates the form with existing data, and handles updates.
+    """
+    model = Account
+    fields = ['account_type', 'balance']
+    template_name = 'accounts/account_form.html'
+    success_url = reverse_lazy('account-list')
+
+
+# =====================================================================
+# 5. DeleteView
+# =====================================================================
+class AccountDeleteView(DeleteView):
+    """
+    WHEN TO CHOOSE:
+    When providing a confirmation page to delete an object from the database. 
+    Upon a POST request to this view, the record is safely deleted.
+    """
+    model = Account
+    template_name = 'accounts/account_confirm_delete.html'
+    success_url = reverse_lazy('account-list')
