@@ -38,3 +38,34 @@ class AccountDashboardView(TemplateView):
         return context
 
 
+# =====================================================================
+# 2. ListView
+# =====================================================================
+class AccountListView(ListView):
+    """
+    WHEN TO CHOOSE:
+    When your primary goal is to display a list of database records. 
+    It automatically handles querying the database, pagination, and 
+    passing the list to the template context.
+    """
+    model = Account
+    template_name = 'accounts/account_list.html'
+    context_object_name = 'accounts'  # Overrides default 'object_list'
+    paginate_by = 10
+
+
+# =====================================================================
+# 3. CreateView
+# =====================================================================
+class AccountCreateView(CreateView):
+    """
+    WHEN TO CHOOSE:
+    When rendering a form to create a new database record. It handles 
+    instantiating the form, validating the user's input, saving the 
+    object to the database, and redirecting on success.
+    """
+    model = Account
+    fields = ['account_number', 'account_type', 'balance']
+    template_name = 'accounts/account_form.html'
+    success_url = reverse_lazy('account-list')
+
