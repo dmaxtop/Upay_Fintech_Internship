@@ -8,10 +8,10 @@ from .models import Account  # Assuming a basic Account model exists
 # =====================================================================
 class AccountLowLevelView(View):
     """
-    WHEN TO CHOOSE: 
-    When you need absolute control over the HTTP request/response cycle.
-    Use this if you are not dealing with standard database models, rendering 
-    templates, or if you're building highly custom logic (like a webhook receiver).
+    Use cases: 
+    absolute control over the HTTP request/response cycle.
+     not dealing with standard database models, rendering templates, 
+     a highly custom logic .
     """
     def get(self, request, *args, **kwargs):
         return HttpResponse("Custom low-level GET response")
@@ -25,10 +25,10 @@ class AccountLowLevelView(View):
 # =====================================================================
 class AccountDashboardView(TemplateView):
     """
-    WHEN TO CHOOSE:
-    When you just need to render a static HTML template, optionally 
-    injecting some basic context data. Excellent for landing pages, 
-    "About Us" pages, or static dashboards.
+    Use Cases:
+    a static HTML template, 
+    injecting some basic context data. 
+    Excellent for landing pages, "About Us" pages, or static dashboards.
     """
     template_name = 'accounts/dashboard.html'
 
@@ -43,10 +43,9 @@ class AccountDashboardView(TemplateView):
 # =====================================================================
 class AccountListView(ListView):
     """
-    WHEN TO CHOOSE:
-    When your primary goal is to display a list of database records. 
-    It automatically handles querying the database, pagination, and 
-    passing the list to the template context.
+    Use Cases:
+    display a list of database records. 
+    automatically handles querying the database, pagination, and passing the list to the template context.
     """
     model = Account
     template_name = 'accounts/account_list.html'
@@ -59,8 +58,8 @@ class AccountListView(ListView):
 # =====================================================================
 class AccountCreateView(CreateView):
     """
-    WHEN TO CHOOSE:
-    When rendering a form to create a new database record. It handles 
+    Use Cases:
+    rendering a form to create a new database record.
     instantiating the form, validating the user's input, saving the 
     object to the database, and redirecting on success.
     """
@@ -74,10 +73,10 @@ class AccountCreateView(CreateView):
 # =====================================================================
 class AccountUpdateView(UpdateView):
     """
-    WHEN TO CHOOSE:
-    When you need to update an existing database record via a form. 
-    It automatically fetches the specific object using a URL parameter 
-    (like `pk`), populates the form with existing data, and handles updates.
+    Use Cases:
+    update an existing database record via a form. 
+    fetches the specific object using a URL parameter 
+     populates the form with existing data, and handles updates.
     """
     model = Account
     fields = ['account_type', 'balance']
@@ -90,8 +89,8 @@ class AccountUpdateView(UpdateView):
 # =====================================================================
 class AccountDeleteView(DeleteView):
     """
-    WHEN TO CHOOSE:
-    When providing a confirmation page to delete an object from the database. 
+    Use Cases:
+    providing a confirmation page to delete an object from the database. 
     Upon a POST request to this view, the record is safely deleted.
     """
     model = Account
