@@ -3,14 +3,14 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 # Import your initial architectural comparison views
-from drf_views_compare import (
+from api.drf_views_compare import (
     TransactionAPIView, 
     TransactionGenericAPIView
 )
 
 
 
-from drf_views_custom_methods import AccountViewSet, TransactionViewSet
+from api.drf_views_custom_methods import AccountViewSet, TransactionViewSet
 
 # Initialize the single central router
 router = DefaultRouter()

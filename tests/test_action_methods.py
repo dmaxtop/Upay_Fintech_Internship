@@ -27,15 +27,15 @@ if not settings.configured:
     call_command('migrate', verbosity=0, interactive=False)
     from django.db import connection
     with connection.schema_editor() as schema_editor:
-        from models import Account, Transaction
+        from api.models import Account, Transaction
         schema_editor.create_model(Account)
         schema_editor.create_model(Transaction)
 
 # 2. Test Execution Engine Imports
 from django.contrib.auth.models import User
 from rest_framework.test import APIRequestFactory, force_authenticate
-from models import Account, Transaction
-from drf_views_custom_methods import AccountViewSet, TransactionViewSet  # Adjust if saved elsewhere
+from api.models import Account, Transaction
+from api.drf_views_custom_methods import AccountViewSet, TransactionViewSet  # Adjust if saved elsewhere
 
 def run_production_api_tests():
     factory = APIRequestFactory()

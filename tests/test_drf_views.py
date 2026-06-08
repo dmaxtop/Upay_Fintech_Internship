@@ -29,13 +29,13 @@ if not settings.configured:
     # Now safely construct your custom application tables in the memory DB
     from django.db import connection
     with connection.schema_editor() as schema_editor:
-        from models import Account, Transaction
+        from api.models import Account, Transaction
         schema_editor.create_model(Account)
         schema_editor.create_model(Transaction)
 
 # 2. Setup DRF test utilities and views
 from rest_framework.test import APIRequestFactory
-from drf_views_compare import TransactionAPIView, TransactionGenericAPIView, TransactionViewSet
+from api.drf_views_compare import TransactionAPIView, TransactionGenericAPIView, TransactionViewSet
 
 def test_view_lifecycle():
     factory = APIRequestFactory()
@@ -44,7 +44,7 @@ def test_view_lifecycle():
     # 0. Database Pre-population
     # -------------------------------------------------------------------------
     from django.contrib.auth.models import User
-    from models import Account
+    from api.models import Account
     
     # Create a mock user since Account relies on it
     mock_user = User.objects.create_user(username="testuser", password="password123")

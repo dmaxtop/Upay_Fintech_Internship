@@ -36,7 +36,7 @@ if not settings.configured:
 
     from django.db import connection
     with connection.schema_editor() as schema_editor:
-        from models import Account
+        from api.models import Account
         schema_editor.create_model(Account)
 
 # Mocked URL patterns to satisfy reverse_lazy('account-list') redirects
@@ -51,7 +51,7 @@ urlpatterns = [
 from django.test import RequestFactory
 from unittest.mock import patch
 
-from django_views_compare import (
+from api.django_views_compare import (
     AccountLowLevelView, AccountDashboardView, AccountListView,
     AccountCreateView, AccountUpdateView, AccountDeleteView
 )
@@ -60,7 +60,7 @@ def test_cbv_lifecycle():
     factory = RequestFactory()
     
     from django.contrib.auth.models import User
-    from models import Account
+    from api.models import Account
     
     mock_user = User.objects.create_user(username="dj_test_user", password="password123")
     
