@@ -10,6 +10,7 @@ from .drf_views_compare import (
     TransactionViewSet as CompareTransactionViewSet  # Renamed with alias to avoid collision
 )
 
+from .django_views_compare import AccountLowLevelView
 
 router = DefaultRouter()
 router.register(r'accounts', AccountViewSet, basename='account')
