@@ -35,7 +35,7 @@ if not settings.configured:
 
 # 2. Setup DRF test utilities and views
 from rest_framework.test import APIRequestFactory
-from drf_views_compare import TransactionAPIView, TransactionGenericAPIView
+from drf_views_compare import TransactionAPIView, TransactionGenericAPIView, TransactionViewSet
 
 def test_view_lifecycle():
     factory = APIRequestFactory()
@@ -101,6 +101,40 @@ def test_view_lifecycle():
         print(f"   Data (After POST): {response_3.data}\n")
     except Exception as e:
         print(f"❌ Approach 1 Re-Verification Failed unexpected error: {e}\n")
+
+    # =========================================================================
+    # Test 4: Testing Approach 3 (ModelViewSet) GET / List Execution
+    # =========================================================================
+    # Explicitly mapping HTTP GET to the ViewSet 'list' action
+    viewset_list = TransactionViewSet.as_view({'get': 'list'})
+    request_4 = factory.get('/tx-viewset/')
+    
+    try:
+        response_4 = viewset_list(request_4)
+        print(f"✅ Approach 3 (ModelViewSet) GET/List Compiled & Executed.")
+        print(f"   Status Code: {response_4.status_code}")
+        print(f"   Data (Fetches items existing in DB): {response_4.data}\n")
+    except Exception as e:
+        print(f"❌ Approach 3 GET/List Failed unexpected error: {e}\n")
+
+    # =========================================================================
+    # Test 5: Testing Approach 3 (ModelViewSet) POST / Create Execution
+    # =========================================================================
+    # Explicitly mapping HTTP POST to the ViewSet 'create' action
+    viewset_create = TransactionViewSet.as_view({'post': 'create'})
+    test_data_vset = {
+        "amount": "250.50",
+        "account": mock_account.id
+    }
+    request_5 = factory.post('/tx-viewset/', data=test_data_vset, format='json')
+    
+    try:
+        response_5 = viewset_create(request_5)
+        print(f"✅ Approach 3 (ModelViewSet) POST/Create Compiled & Executed.")
+        print(f"   Status Code: {response_5.status_code}")
+        print(f"   Response Body (Created Data): {response_5.data}\n")
+    except Exception as e:
+        print(f"❌ Approach 3 POST/Create Failed unexpected error: {e}\n")
 
 if __name__ == "__main__":
     test_view_lifecycle()
