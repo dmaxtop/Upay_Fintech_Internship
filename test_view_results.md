@@ -52,3 +52,34 @@ Executing Verification Tests...
    Status Code: 201
    Response Body (Created Data): {'id': 2, 'amount': '250.50', 'timestamp': '2026-06-07T23:46:00.665509-05:00', 'is_reversed': False, 'account': 1}
 
+
+**Task 3 testing**
+
+Executing Production API Feature & Constraints Verification...
+=================================================================
+
+▶ Testing Task 4: get_queryset User Isolation
+   [User Alpha] Accounts visible: 1
+   [User Beta]  Accounts visible: 0
+   ✅ Pass: Users can only see their own accounts.
+
+▶ Testing Task 4: Contextual Serializer Class Switching
+   [List Action Fields]:   ['id', 'account_number', 'account_type', 'is_frozen']
+   [Detail Action Fields]: ['id', 'account_number', 'account_type', 'balance', 'is_frozen', 'user']
+   ✅ Pass: List uses AccountListSerializer (no balance), Detail uses AccountDetailSerializer.
+
+▶ Testing Task 3 & 4: Custom @action 'freeze' & Guard Verification
+   [Freeze Trigger Response]: Account frozen.
+   [Tx Request on Frozen Account Status]: 400
+   ✅ Pass: Custom action successfully froze account and blocked transactions.
+
+▶ Testing Task 3: Custom @action 'statement'
+   [Statement Payloads Returned Keys]: ['account_number', 'balance', 'transactions']
+   [Statement Transaction Entries Count]: 1
+   ✅ Pass: Bank statement context successfully consolidated.
+
+▶ Testing Task 3: Custom @action 'reverse'
+   [Reversal Action Response]: Transaction reversed.
+   [Post-Reversal Account Balance]: $750.00
+   [Transaction Is Reversed Flag]:  True
+   ✅ Pass: Balances re-calculated and inversion complete.
