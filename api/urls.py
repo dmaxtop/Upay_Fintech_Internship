@@ -2,17 +2,17 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-# 1. Import Live Production ViewSets (Steps 2 & 3)
+# 1. Import Live Production ViewSets (Tasks 2 & 3)
 from .views import AccountViewSet, TransactionViewSet
 
-# 2. Import DRF Structural Evolution Comparison Views (Step 1)
+# 2. Import DRF Structural Evolution Comparison Views (Task 1)
 from .drf_views_compare import (
     TransactionAPIView,
     TransactionGenericAPIView,
-    TransactionViewSet as CompareTransactionViewSet  # Aliased to prevent name clashing with production
+    TransactionViewSet as CompareTransactionViewSet  # Aliased to prevent clashing with production views
 )
 
-# 3. Import Traditional Django Comparison Views (Step 0)
+# 3. Import Traditional Django Comparison Views (Task 0)
 from .django_views_compare import (
     AccountLowLevelView,
     AccountDashboardView,
@@ -25,7 +25,7 @@ from .django_views_compare import (
 # Initialize the router to auto-generate standard CRUD resource paths
 router = DefaultRouter()
 
-# Register Live Production REST API Endpoints
+# Register Live Production REST API Endpoints (Task 2 & 3)
 router.register(r'accounts', AccountViewSet, basename='account')
 router.register(r'transactions', TransactionViewSet, basename='transaction')
 
