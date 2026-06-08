@@ -33,7 +33,12 @@ class TransactionAPIView(APIView):
 class TransactionGenericAPIView(GenericAPIView, 
                                 mixins.ListModelMixin, 
                                 mixins.CreateModelMixin):
-
+    """
+    - Pros: Reduces boilerplate , standard actions (listing, creating) are reusable Mixins. 
+    - Cons: Code starts becoming declarative ("magic"). 
+            queries like `self.list()` maps to a GET request(and etc)
+            handles serialization automatically.
+    """
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
 
