@@ -67,6 +67,10 @@ class AccountCreateView(CreateView):
     fields = ['account_number', 'account_type', 'balance']
     template_name = 'accounts/account_form.html'
     success_url = reverse_lazy('account-list')
+    def form_valid(self, form):
+            # Automatically assign the logged-in user to the account model instance
+            form.instance.user = self.request.user
+            return super().form_valid(form)
 
 # =====================================================================
 # 4. UpdateView
@@ -82,8 +86,7 @@ class AccountUpdateView(UpdateView):
     fields = ['account_type', 'balance']
     template_name = 'accounts/account_form.html'
     success_url = reverse_lazy('account-list')
-
-
+    
 # =====================================================================
 # 5. DeleteView
 # =====================================================================
