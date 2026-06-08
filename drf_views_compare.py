@@ -26,3 +26,21 @@ class TransactionAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# Approach 2: GenericAPIView + Mixins (The Semi-Automated Approach)
+
+class TransactionGenericAPIView(GenericAPIView, 
+                                mixins.ListModelMixin, 
+                                mixins.CreateModelMixin):
+
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer
+
+    def get(self, request, *args, **kwargs):
+        # self.list comes from ListModelMixin
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        # self.create comes from CreateModelMixin
+        return self.create(request, *args, **kwargs)
