@@ -54,6 +54,14 @@ class TransactionGenericAPIView(GenericAPIView,
 # Approach 3: ModelViewSet (The Rapid, Standardized Approach)
 
 class TransactionViewSet(viewsets.ModelViewSet):
+    """
+    - Pros: Zero boilerplate for standard CRUD.    
+            .list(), .create(), .retrieve(), .update(), and .destroy() is a single class. 
+            Pairs with Routers and automatically generates URL configurations.
     
+    - Cons: Hard customization behavior (needs to override hooks). 
+            hides configuration behind abstraction , not ideal for non-standard APIs.
+            Debugging medium hard.
+    """
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
