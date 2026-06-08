@@ -15,6 +15,8 @@ class Account(models.Model):
         return f"{self.account_number} ({self.user.username})"
 
 class Transaction(models.Model):
+    class Meta:
+        app_label = 'DRM'
     account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='transactions')
     amount = models.DecimalField(max_digits=12, decimal_places=2)
     timestamp = models.DateTimeField(auto_now_add=True)
