@@ -1,5 +1,5 @@
 from rest_framework.views import APIView
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import  ListCreateAPIView
 from rest_framework import mixins, viewsets
 from rest_framework.response import Response
 from rest_framework import status
@@ -30,9 +30,10 @@ class TransactionAPIView(APIView):
 
 # Approach 2: GenericAPIView + Mixins (The Semi-Automated Approach)
 
-class TransactionGenericAPIView(GenericAPIView, 
-                                mixins.ListModelMixin, 
-                                mixins.CreateModelMixin):
+class TransactionGenericAPIView(ListCreateAPIView):
+    """
+    ListCreateApi View Combines GenericAPIView, ListModelMixin, and CreateModelMixin automatically.
+    """
     """
     - Pros: Reduces boilerplate , standard actions (listing, creating) are reusable Mixins. 
     - Cons: Code starts becoming declarative ("magic"). 
