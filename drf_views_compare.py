@@ -11,11 +11,9 @@ from .serializers import TransactionSerializer
 # =====================================================================
 class TransactionAPIView(APIView):
     """
-    TRADEOFFS:
-    - Pros: Complete, explicit control over HTTP methods. You can see 
-            exactly what happens on GET or POST. No magic.
-    - Cons: High amount of boilerplate. You must manually handle querysets,
-            serialization, validation, serialization errors, and HTTP status codes.
+    - Pros: Complete control over HTTP methods.GET or POST is easily rtractable.
+    - Cons: boilerplate, manually handling querysets,
+        serialization, validation, and HTTP status codes all needs to be manual or using template.
     """
     def get(self, request, format=None):
         transactions = Transaction.objects.all()
