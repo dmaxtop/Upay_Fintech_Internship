@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Account(models.Model):
+    class Meta:
+        app_label = 'DRM'  
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='accounts')
     account_number = models.CharField(max_length=20, unique=True)
     account_type = models.CharField(max_length=20, default='checking')
