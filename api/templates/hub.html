@@ -36,11 +36,56 @@
         <div class="grid">
             <a href="/api/compare/django/low-level/" target="_blank" class="card">
                 <div>
-                    <span class="badge badge-django">Django View</span>
+                    <span class="badge badge-django">View (Base)</span>
                     <div class="card-title">Low-Level Base View</div>
-                    <div class="card-desc">Returns a raw, manual HTTP string response directly bypassing default template processors.</div>
+                    <div class="card-desc">Returns a raw, manual HTTP response string bypassing the default template rendering engines entirely.</div>
                 </div>
                 <div class="card-url">/api/compare/django/low-level/</div>
+            </a>
+
+            <a href="/api/compare/django/dashboard/" target="_blank" class="card">
+                <div>
+                    <span class="badge badge-django">TemplateView</span>
+                    <div class="card-title">Dashboard View</div>
+                    <div class="card-desc">Renders an explicit, static HTML template configuration combined with injection context data parameters.</div>
+                </div>
+                <div class="card-url">/api/compare/django/dashboard/</div>
+            </a>
+
+            <a href="/api/compare/django/list/" target="_blank" class="card">
+                <div>
+                    <span class="badge badge-django">ListView</span>
+                    <div class="card-title">Account Catalog List</div>
+                    <div class="card-desc">Automatically processes database model queries, handles table pagination sets, and feeds context matrices.</div>
+                </div>
+                <div class="card-url">/api/compare/django/list/</div>
+            </a>
+
+            <a href="/api/compare/django/create/" target="_blank" class="card">
+                <div>
+                    <span class="badge badge-django">CreateView</span>
+                    <div class="card-title">Account Form Wizard</div>
+                    <div class="card-desc">Generates model-bound input structures, validates submission payloads, and controls persistent data storage layers.</div>
+                </div>
+                <div class="card-url">/api/compare/django/create/</div>
+            </a>
+
+            <a href="/api/compare/django/update/1/" target="_blank" class="card">
+                <div>
+                    <span class="badge badge-django">UpdateView</span>
+                    <div class="card-title">Modify Record Interface</div>
+                    <div class="card-desc">Pre-populates an operational layout context bound to a target instance ID to safely rewrite row structures.</div>
+                </div>
+                <div class="card-url">/api/compare/django/update/1/</div>
+            </a>
+
+            <a href="/api/compare/django/delete/1/" target="_blank" class="card">
+                <div>
+                    <span class="badge badge-django">DeleteView</span>
+                    <div class="card-title">Destruction Confirmation</div>
+                    <div class="card-desc">Intercepts raw programmatic drops by routing requests into a template checking verification gateway.</div>
+                </div>
+                <div class="card-url">/api/compare/django/delete/1/</div>
             </a>
         </div>
 
