@@ -1,23 +1,31 @@
 # urls.py
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .drf_views_comparison import (
+
+# Import your initial architectural comparison views
+from drf_views_compare import (
     TransactionAPIView, 
-    TransactionGenericAPIView, 
-    TransactionViewSet
+    TransactionGenericAPIView
 )
 
-# Set up the router specifically for Approach 3
+
+
+from drf_views_override import AccountViewSet, TransactionViewSet
+
+# Initialize the single central router
 router = DefaultRouter()
-router.register(r'tx-viewset', TransactionViewSet, basename='tx-viewset')
+
+# Task 2: Wire up full CRUD endpoints for Account and Transaction
+router.register(r'accounts', AccountViewSet, basename='account')
+router.register(r'transactions', TransactionViewSet, basename='transaction')
 
 urlpatterns = [
-    # Approach 1: Low-level APIView
+    # --- Architectural Comparison Paths (From Steps 1 & 2) ---
     path('tx-apiview/', TransactionAPIView.as_view(), name='tx-apiview'),
-    
-    # Approach 2: GenericAPIView + Mixins
     path('tx-generic/', TransactionGenericAPIView.as_view(), name='tx-generic'),
     
-    # Approach 3: ModelViewSet managed by Router
-    path('', include(router.urls)),
+    # --- Production API Paths (From Steps 3 & 4) ---
+    # automatically includes paths for standard CRUD as well as custom
+    # @action methods: /api/accounts/{id}/freeze/, /api/accounts/{id}/statement/, etc.
+    path('api/', include(router.urls)),
 ]
