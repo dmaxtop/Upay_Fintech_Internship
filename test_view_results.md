@@ -1,3 +1,35 @@
+**Django Views**
+Executing Django CBV Lifecycle Verification Tests...
+------------------------------------------------------------
+✅ Test 0 (Base View): GET -> 200 (Custom low-level GET response)
+                       POST -> 200 (Custom low-level POST response)
+
+✅ Test 1 (TemplateView) Context Verified: page_title = 'Account Dashboard'
+
+C:\Users\i-mumit\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\views\generic\list.py:91: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'models.Account'> QuerySet.
+  return self.paginator_class(
+✅ Test 2 (ListView) Database Query Executed:
+   - Pulled 1 account(s) from memory DB.
+   - Target Record Found: ACC-111222
+
+✅ Test 3 (CreateView) Pipeline Executed:
+   - Status Code: 302 (Redirect to /accounts/)
+   - DB Verification: New account created with balance $150.75
+
+✅ Test 4 (UpdateView) Pipeline Executed:
+   - Status Code: 302 (Redirect to /accounts/)
+   - DB Verification: Refreshed Type -> 'Business Savings', Balance -> $9999.99
+
+✅ Test 5 (DeleteView) Pipeline Executed:
+   - Status Code: 302 (Redirect to /accounts/)
+   - DB Verification: Record search count for ID 1 is now 0 (Successfully Purged)
+
+
+
+
+
+
+**DRF Views**
 Executing Verification Tests...
 --------------------------------------------------
 ✅ Approach 1 (APIView) GET Compiled & Executed.
