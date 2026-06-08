@@ -1,10 +1,10 @@
 # bank_project/urls.py
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import RedirectView
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),  # Seamless application routing isolation
-    path('', RedirectView.as_view(url='api/', permanent=False)),
+    path('', TemplateView.as_view(template_name='hub.html')),
 ]
