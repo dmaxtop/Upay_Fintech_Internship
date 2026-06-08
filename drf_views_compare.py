@@ -6,9 +6,9 @@ from rest_framework import status
 from django.shortcuts import get_object_buffer, get_object_or_404
 from .models import Transaction
 from .serializers import TransactionSerializer
-# =====================================================================
+
 # Approach 1: APIView (The Explicit / Low-Level Approach)
-# =====================================================================
+
 class TransactionAPIView(APIView):
     """
     - Pros: Complete control over HTTP methods.GET or POST is easily rtractable.
@@ -49,3 +49,11 @@ class TransactionGenericAPIView(GenericAPIView,
     def post(self, request, *args, **kwargs):
         # self.create comes from CreateModelMixin
         return self.create(request, *args, **kwargs)
+
+
+# Approach 3: ModelViewSet (The Rapid, Standardized Approach)
+
+class TransactionViewSet(viewsets.ModelViewSet):
+    
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer
