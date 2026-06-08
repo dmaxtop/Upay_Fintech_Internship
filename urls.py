@@ -10,7 +10,7 @@ from drf_views_compare import (
 
 
 
-from drf_views_override import AccountViewSet, TransactionViewSet
+from drf_views_custom_methods import AccountViewSet, TransactionViewSet
 
 # Initialize the single central router
 router = DefaultRouter()
