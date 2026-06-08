@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Django Task 0 - ListView</title>
+    <title>Account Records - Task 0</title>
     <style>
         body { font-family: sans-serif; margin: 40px; background: #f8fafc; }
         .box { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); max-width: 600px; }
@@ -13,7 +13,7 @@
 <body>
     <div class="box">
         <h2>Task 0: Account Records (ListView)</h2>
-        <a href="{% url 'django-create' %}" class="btn">+ Create New Account</a>
+        <a href="{% url 'compare-django-create' %}" class="btn">+ Create New Account</a>
         
         {% for account in accounts %}
             <div class="account-item">
@@ -22,12 +22,12 @@
                     <br><small>Balance: ${{ account.balance }}</small>
                 </div>
                 <div class="actions">
-                    <a href="{% url 'django-update' account.id %}">Edit</a>
-                    <a href="{% url 'django-delete' account.id %}" style="color: red;">Delete</a>
+                    <a href="{% url 'compare-django-update' account.id %}">Edit</a>
+                    <a href="{% url 'compare-django-delete' account.id %}" style="color: red;">Delete</a>
                 </div>
             </div>
         {% empty %}
-            <p>No accounts found in the database directory.</p>
+            <p style="color: #64748b; font-size: 0.95rem;">No accounts available.</p>
         {% endfor %}
     </div>
 </body>
