@@ -12,7 +12,6 @@ if not settings.configured:
             'django.contrib.auth',
             'rest_framework',
         ],
-        # We give it an in-memory SQLite DB so ORM calls won't crash the script
         DATABASES={
             'default': {
                 'ENGINE': 'django.db.backends.sqlite3',
@@ -24,8 +23,10 @@ if not settings.configured:
     )
     django.setup()
 
-    # Automatically construct the model tables in our virtual memory DB
-    # This ensures Transaction.objects.all() actually finds an existing table!
+    # Automatically run migrations for Django's built-in apps (creates auth_user!)
+    call_command('migrate', verbosity=0, interactive=False)
+
+    # Now safely construct your custom application tables in the memory DB
     from django.db import connection
     with connection.schema_editor() as schema_editor:
         from models import Account, Transaction
@@ -42,10 +43,17 @@ def test_view_lifecycle():
     # -------------------------------------------------------------------------
     # 0. Database Pre-population
     # -------------------------------------------------------------------------
-    # Create a dummy Account in the in-memory database first.
-    # If your Account model has other mandatory fields, define them here.
+    from django.contrib.auth.models import User
     from models import Account
-    mock_account = Account.objects.create(account_number="ACC-MOCK-999")
+    
+    # Create a mock user since Account relies on it
+    mock_user = User.objects.create_user(username="testuser", password="password123")
+    
+    # Create the dummy Account linked to our new user
+    mock_account = Account.objects.create(
+        account_number="ACC-MOCK-999",
+        user=mock_user  # Passing the user object to satisfy the foreign key
+    )
     
     print("\nExecuting Explicit Verification Tests...")
     print("-" * 50)
@@ -69,7 +77,6 @@ def test_view_lifecycle():
     # =========================================================================
     view_2 = TransactionGenericAPIView.as_view()
     
-    # Passing the valid mock account ID clears the 400 validation hurdle!
     test_data = {
         "amount": "100.00",
         "account": mock_account.id
