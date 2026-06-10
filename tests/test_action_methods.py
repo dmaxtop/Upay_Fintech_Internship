@@ -35,7 +35,7 @@ if not settings.configured:
 from django.contrib.auth.models import User
 from rest_framework.test import APIRequestFactory, force_authenticate
 from api.models import Account, Transaction
-from api.drf_views_custom_methods import AccountViewSet, TransactionViewSet  # Adjust if saved elsewhere
+from api.views.drf_views_custom_methods import AccountViewSet, TransactionViewSet  # Adjust if saved elsewhere
 
 def run_production_api_tests():
     factory = APIRequestFactory()

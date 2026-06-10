@@ -3,17 +3,17 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 # 1. Import Live Production ViewSets (Tasks 2 & 3)
-from .views import AccountViewSet, TransactionViewSet
+from .views.views import AccountViewSet, TransactionViewSet
 
 # 2. Import DRF Structural Evolution Comparison Views (Task 1)
-from .drf_views_compare import (
+from .views.drf_views_compare import (
     TransactionAPIView,
     TransactionGenericAPIView,
     TransactionViewSet as CompareTransactionViewSet  # Aliased to prevent clashing with production views
 )
 
 # 3. Import Traditional Django Comparison Views (Task 0)
-from .django_views_compare import (
+from .views.django_views_compare import (
     AccountLowLevelView,
     AccountDashboardView,
     AccountListView,

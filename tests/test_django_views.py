@@ -51,7 +51,7 @@ urlpatterns = [
 from django.test import RequestFactory
 from unittest.mock import patch
 
-from api.django_views_compare import (
+from api.views.django_views_compare import (
     AccountLowLevelView, AccountDashboardView, AccountListView,
     AccountCreateView, AccountUpdateView, AccountDeleteView
 )

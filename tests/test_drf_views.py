@@ -35,7 +35,7 @@ if not settings.configured:
 
 # 2. Setup DRF test utilities and views
 from rest_framework.test import APIRequestFactory
-from api.drf_views_compare import TransactionAPIView, TransactionGenericAPIView, TransactionViewSet
+from api.views.drf_views_compare import TransactionAPIView, TransactionGenericAPIView, TransactionViewSet
 
 def test_view_lifecycle():
     factory = APIRequestFactory()
