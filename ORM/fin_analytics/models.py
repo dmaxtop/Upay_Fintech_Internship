@@ -1,18 +1,9 @@
 from django.db import models
-from django.db.models import Q, F
+from django.db.models import Q
 from django.core.validators import MinValueValidator
 from decimal import Decimal
+from fin_analytics.managers import ActiveAccountManager, SuccessfulTransactionManager
 
-# ─── CUSTOM MANAGERS ───
-class ActiveAccountManager(models.Manager):
-    def get_queryset(self):
-        return super().get_queryset().filter(is_active=True)
-
-class SuccessfulTransactionManager(models.Manager):
-    def get_queryset(self):
-        return super().get_queryset().filter(status='SUCCESS')
-
-# ─── MODELS ───
 class UserProfile(models.Model):
     username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(unique=True)
@@ -21,6 +12,9 @@ class UserProfile(models.Model):
     class Meta:
         db_table = 'fin_user_profile'
         indexes = [models.Index(fields=['email'])]
+
+    def __str__(self):
+        return self.username
 
 
 class Account(models.Model):
@@ -32,8 +26,8 @@ class Account(models.Model):
     balance = models.DecimalField(max_digits=12, decimal_places=2, default=Decimal('0.00'))
     is_active = models.BooleanField(default=True)
     
-    objects = models.Manager()  # Default manager
-    active_objects = ActiveAccountManager()  # Custom manager
+    objects = models.Manager()  
+    active_objects = ActiveAccountManager()  
 
     class Meta:
         db_table = 'fin_account'
@@ -44,6 +38,9 @@ class Account(models.Model):
             )
         ]
 
+    def __str__(self):
+        return f"{self.account_number} ({self.account_type})"
+
 
 class Merchant(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -52,6 +49,9 @@ class Merchant(models.Model):
 
     class Meta:
         db_table = 'fin_merchant'
+
+    def __str__(self):
+        return self.name
 
 
 class Transaction(models.Model):
@@ -74,6 +74,9 @@ class Transaction(models.Model):
             models.Index(fields=['status']),
         ]
 
+    def __str__(self):
+        return f"TX {self.id}: {self.amount} ({self.status})"
+
 
 class Card(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='cards')
@@ -83,3 +86,6 @@ class Card(models.Model):
 
     class Meta:
         db_table = 'fin_card'
+
+    def __str__(self):
+        return f"Card Ending {self.card_number[-4:]}"
