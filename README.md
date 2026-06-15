@@ -4,6 +4,7 @@
 
 Open your terminal in the root directory of your project (where manage.py lives) and run the following commands sequentially:
 
+
 ### **Step A: Apply Database Migrations**
 
 _(If changing machines or database files)_ Before launching, ensure your local SQLite schema is completely up to date.
