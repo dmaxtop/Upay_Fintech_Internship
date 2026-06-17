@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Django Task 0 - Account Form</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; background: #f8fafc; }
+        .box { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); max-width: 400px; }
+        input, select { width: 100%; padding: 8px; margin: 8px 0 15px 0; box-sizing: border-box; }
+        button { background: #22c55e; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; width: 100%; }
+        .back { display: block; text-align: center; margin-top: 15px; color: #64748b; text-decoration: none; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>{% if object %}Modify Account{% else %}Register New Account{% endif %}</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Ledger Entry</button>
+        </form>
+        <a href="{% url 'compare-django-list' %}" class="back">← Cancel and Return to List</a>
+    </div>
+</body>
+</html>

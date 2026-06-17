@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm Delete</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; background: #f8fafc; }
+        .box { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(219,68,85,0.1); max-width: 400px; border-top: 4px solid #ef4444; }
+        button { background: #ef4444; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; }
+        .cancel { color: #64748b; margin-left: 15px; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Are you absolutely sure?</h2>
+        <p>You are about to delete account: <strong>{{ object.account_number }}</strong>. This action cannot be undone.</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Yes, Delete Permanently</button>
+            <a href="{% url 'compare-django-list' %}" class="cancel">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>
